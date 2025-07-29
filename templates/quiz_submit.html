@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Submit Quiz: {{ quiz.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
+{% block extra_content %}
+  <h3>Your Previous Submission:</h3>
+  {% if submission %}
+    <p>Submitted on: {{ submission.submitted_at }}</p>
+    <p>Answers: {{ submission.answers }}</p>
+    <p>Grade: {{ submission.grade }}</p>
+    <p>Feedback: {{ submission.feedback }}</p>
+  {% else %}
+    <p>No previous submission found.</p>
+  {% endif %}
+{% endblock %}

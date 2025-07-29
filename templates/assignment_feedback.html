@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Assignment Feedback: {{ assignment.title }}</h2>
+  {% if submission %}
+    <p>Submitted on: {{ submission.created_at }}</p>
+    <p>File: <a href="{{ submission.submitted_file.url }}">{{ submission.submitted_file.name }}</a></p>
+    <p>Text: {{ submission.submitted_text }}</p>
+  {% else %}
+    <p>No submission found.</p>
+  {% endif %}
+{% endblock %}
+
+{% block extra_content %}
+  <h3>Feedback</h3>
+  {% if feedback %}
+    <p>{{ feedback }}</p>
+  {% else %}
+    <p>No feedback available.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}LMS{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f7f7f7; }
+        .navbar { background: #2c3e50; color: #fff; padding: 1em; }
+        .navbar a { color: #fff; margin-right: 1em; text-decoration: none; }
+        .container { max-width: 800px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
+        h1, h2, h3 { color: #2c3e50; }
+        .footer { text-align: center; color: #888; margin: 2em 0 0 0; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/materials/">Materials</a>
+        <a href="/admin/">Admin</a>
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.email }}</span>
+            {% comment %} <a href="/logout/">Logout</a> {% endcomment %}
+        {% else %}
+            <a href="/login/">Login</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+        {% block extra_content %}{% endblock %}
+    </div>
+    <div class="footer">
+        &copy; {{ year|default:2025 }} LMS Project
+    </div>
+</body>
+</html>

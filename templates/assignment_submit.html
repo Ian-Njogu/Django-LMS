@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Submit Assignment: {{ assignment.title }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+  <hr>
+  <h3>Your Previous Submission:</h3>
+  {% if submission %}
+    <p>Submitted on: {{ submission.created_at }}</p>
+    <p>File: <a href="{{ submission.submitted_file.url }}">{{ submission.submitted_file.name }}</a></p>
+    <p>Text: {{ submission.submitted_text }}</p>
+  {% else %}
+    <p>No previous submission found.</p>
+  {% endif %}
+{% endblock %}
